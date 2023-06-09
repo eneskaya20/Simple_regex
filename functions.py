@@ -9,8 +9,7 @@ def find_com(paragraph1, paragraph2, paragraph3):
 
 def extract_email_addresses(text):
     pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
-    # \b is for word boundary and 
-
+    # regex pattern for email addresses 
     email_addresses = re.findall(pattern, text)
     return email_addresses
 
@@ -33,5 +32,27 @@ def par_low(paragraph1, paragraph2, paragraph3):
     print(t2)
     print(t3)   
 
+def find_url(string):
+    url = re.findall('(?:http[s]?://|www\.)\S+', string)
+    print("Urls: ",url)
+
+
+def find_input(str_input,paragraph):
+    count = len(re.findall(str_input, paragraph))
+    print("Input count in string:", count)
+
+
+def replace_date_format(paragraph):
+    # regex pattern for date format dd-mm-yyyy
+    pattern = r"(\d{2})-(\d{2})-(\d{4})"    
+    matches = re.findall(pattern, paragraph)
+    
+
+    for match in matches:
+        day, month, year = match
+        formatted_date = f"{month}/{day}/{year}"
+        paragraph = paragraph.replace("-".join(match), formatted_date)
+    
+    print(paragraph)
 
 
